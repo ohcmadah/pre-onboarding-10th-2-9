@@ -3,7 +3,7 @@ import { getRecommendations } from '../api';
 import { Recommendation } from '../@types/recommendation';
 import SearchButton from '../components/button';
 import SearchInput from '../components/input/SearchInput';
-import { Item, ListContainer } from '../components/list';
+import { Item, ListContainer, NoResultsItem } from '../components/list';
 import SearchBar from '../components/search';
 import * as S from './style';
 
@@ -36,11 +36,15 @@ const App = () => {
           <SearchButton />
           {searchText && (
             <ListContainer>
-              {recommendations.map(({ id, name }) => (
-                <Item key={id} searchText={searchText}>
-                  {name}
-                </Item>
-              ))}
+              {recommendations.length ? (
+                recommendations.map(({ id, name }) => (
+                  <Item key={id} searchText={searchText}>
+                    {name}
+                  </Item>
+                ))
+              ) : (
+                <NoResultsItem />
+              )}
             </ListContainer>
           )}
         </SearchBar>

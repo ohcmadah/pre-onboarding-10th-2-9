@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getRecommendations } from '../api';
 import { Recommendation } from '../@types/recommendation';
+import debounce from '../utils/debounce';
 import SearchButton from '../components/button';
 import SearchInput from '../components/input/SearchInput';
 import { Item, ListContainer, NoResultsItem } from '../components/list';
@@ -13,13 +14,17 @@ const App = () => {
 
   useEffect(() => {
     if (searchText.trim() === '') return;
-    const fetch = async () => {
+
+    const debounced = debounce(async () => {
       const res = await getRecommendations(searchText);
       if (res.isSuccess) {
         setRecommendations(res.data);
       }
-    };
-    fetch();
+    }, 500);
+    debounced();
+
+    // eslint-disable-next-line consistent-return
+    return () => debounced.clear();
   }, [searchText]);
 
   return (

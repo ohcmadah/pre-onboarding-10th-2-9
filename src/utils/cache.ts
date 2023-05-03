@@ -16,7 +16,7 @@ class Cache {
 
   constructor(config?: Config) {
     this.cache = {};
-    this.staleTime = config?.staleTime || FIVE_MINUTES;
+    this.staleTime = config?.staleTime ?? FIVE_MINUTES;
   }
 
   private has(key: string) {
@@ -43,7 +43,9 @@ class Cache {
   get<T>(key: string): T | undefined {
     if (this.has(key)) {
       const { data, expireTime } = this.cache[key];
-      if (!isExpired(expireTime)) {
+      if (isExpired(expireTime)) {
+        this.remove(key);
+      } else {
         return data as T;
       }
     }

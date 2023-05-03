@@ -1,13 +1,17 @@
 import { Recommendation } from './recommendation';
 
+export interface GetRecommendationsRequest {
+  name: string;
+  options?: Omit<RequestInit, 'method'>;
+}
 export type GetRecommendationsReponse = Recommendation[];
 
-interface APIError {
+export interface APIError {
   isSuccess: false;
   message: string;
 }
 
-interface APISuccess<T> {
+export interface APISuccess<T> {
   isSuccess: true;
   data: T;
 }

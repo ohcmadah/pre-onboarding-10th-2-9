@@ -1,9 +1,9 @@
-import { APIResponse, GetRecommendationsReponse } from '../@types/api';
+import { APIResponse, GetRecommendationsReponse, GetRecommendationsRequest } from '../@types/api';
 
-export const getRecommendations = async (
-  name: string,
-  options?: Omit<RequestInit, 'method'>,
-): Promise<APIResponse<GetRecommendationsReponse>> => {
+export const getRecommendations = async ({
+  name,
+  options,
+}: GetRecommendationsRequest): Promise<APIResponse<GetRecommendationsReponse>> => {
   try {
     const res = await fetch(`/api/?name=${name}`, {
       method: 'GET',

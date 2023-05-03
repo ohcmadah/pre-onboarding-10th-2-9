@@ -62,4 +62,8 @@ export const Input = styled.input`
   min-width: 0;
   flex: 1;
   outline-offset: -2px;
+
+  :focus {
+    outline: none;
+  }
 `;

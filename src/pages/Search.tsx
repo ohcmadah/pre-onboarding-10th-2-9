@@ -6,7 +6,7 @@ import { Item, ListContainer, NoResultsItem } from '../components/list';
 import SearchBar from '../components/search';
 import * as S from './style';
 
-const App = () => {
+const Search = () => {
   const [searchText, setSearchText] = useState('');
   const recommendations = useRecommendations({ name: searchText });
 
@@ -41,4 +41,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Search;

@@ -14,14 +14,21 @@ const App = () => {
 
   useEffect(() => {
     if (searchText.trim() !== '') {
+      const controller = new AbortController();
+      const { signal } = controller;
+
       const debounced = debounce(async () => {
-        const res = await getRecommendations(searchText);
+        const res = await getRecommendations(searchText, { signal });
         if (res.isSuccess) {
           setRecommendations(res.data);
         }
       }, 500);
       debounced();
-      return () => debounced.clear();
+
+      return () => {
+        debounced.clear();
+        controller.abort();
+      };
     }
     return undefined;
   }, [searchText]);

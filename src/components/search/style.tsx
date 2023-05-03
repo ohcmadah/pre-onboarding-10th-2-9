@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { SearchBarProps } from '../../@types/search';
+import { BarProps } from '../../@types/search';
 import * as G from '../../style';
 
 export const Container = styled.div`
@@ -9,7 +9,7 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
-export const Bar = styled.div<SearchBarProps>`
+export const Bar = styled.div<BarProps>`
   border-radius: 42px;
   border: 2px solid;
   border-color: ${({ isFocused }) => (isFocused ? 'rgb(0, 123, 233)' : '#ffffff')};

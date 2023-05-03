@@ -1,10 +1,13 @@
-import { SearchBarProps } from '../../@types/search';
+import { useSearchBarState } from '../../contexts/SearchBarContext';
 import * as S from './style';
 
-const SearchBar = ({ isFocused, children }: React.PropsWithChildren<SearchBarProps>) => (
-  <S.Container>
-    <S.Bar isFocused={isFocused}>{children}</S.Bar>
-  </S.Container>
-);
+const SearchBar = ({ children }: { children: React.ReactNode }) => {
+  const { searchText } = useSearchBarState();
+  return (
+    <S.Container>
+      <S.Bar isFocused={!!searchText}>{children}</S.Bar>
+    </S.Container>
+  );
+};
 
 export default SearchBar;

@@ -30,6 +30,7 @@ module.exports = {
         caughtErrorsIgnorePattern: '^_',
       },
     ],
+    'no-shadow': 'off',
   },
   settings: {
     'import/resolver': {

@@ -1,4 +1,4 @@
 export interface ListItemProps {
-  searchText: string;
+  isActive?: boolean;
   children: string;
 }

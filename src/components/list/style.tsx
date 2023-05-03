@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as G from '../../style';
+import { ListItemProps } from '../../@types/list';
 
 export const ZIndexWrapper = styled.div`
   z-index: 1;
@@ -30,7 +31,7 @@ export const Description = styled.div`
   font-family: inherit;
 `;
 
-export const Item = styled.div`
+export const Item = styled.div<Pick<ListItemProps, 'isActive'>>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,6 +41,7 @@ export const Item = styled.div`
   padding: 8px 24px;
   cursor: pointer;
   word-break: break-all;
+  background-color: ${({ isActive }) => isActive && '#efefef'};
 `;
 
 export const IconContainer = styled.div`

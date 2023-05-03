@@ -1,5 +1,3 @@
-import Container from './Container';
-import Item from './Item';
-import NoResultsItem from './NoResultsItem';
+import RecommendationDropdown from './RecommendationDropdown';
 
-export { Container as ListContainer, Item, NoResultsItem };
+export default RecommendationDropdown;

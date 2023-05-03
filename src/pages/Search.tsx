@@ -1,15 +1,11 @@
-import { useState } from 'react';
-import useRecommendations from '../hooks/useRecommendations';
+import { SearchBarContextProvider } from '../contexts/SearchBarContext';
 import SearchButton from '../components/button';
 import SearchInput from '../components/input/SearchInput';
-import { Item, ListContainer, NoResultsItem } from '../components/list';
 import SearchBar from '../components/search';
+import RecommendationDropdown from '../components/list';
 import * as S from './style';
 
 const Search = () => {
-  const [searchText, setSearchText] = useState('');
-  const recommendations = useRecommendations({ name: searchText });
-
   return (
     <S.Wrapper>
       <S.Container>
@@ -19,23 +15,13 @@ const Search = () => {
           온라인으로 참여하기
         </S.Title>
 
-        <SearchBar isFocused={!!searchText}>
-          <SearchInput value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-          <SearchButton />
-          {searchText && (
-            <ListContainer>
-              {recommendations.length ? (
-                recommendations.map(({ id, name }) => (
-                  <Item key={id} searchText={searchText}>
-                    {name}
-                  </Item>
-                ))
-              ) : (
-                <NoResultsItem />
-              )}
-            </ListContainer>
-          )}
-        </SearchBar>
+        <SearchBarContextProvider>
+          <SearchBar>
+            <SearchInput />
+            <SearchButton />
+            <RecommendationDropdown />
+          </SearchBar>
+        </SearchBarContextProvider>
       </S.Container>
     </S.Wrapper>
   );

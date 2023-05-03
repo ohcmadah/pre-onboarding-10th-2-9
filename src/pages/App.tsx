@@ -13,18 +13,17 @@ const App = () => {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
 
   useEffect(() => {
-    if (searchText.trim() === '') return;
-
-    const debounced = debounce(async () => {
-      const res = await getRecommendations(searchText);
-      if (res.isSuccess) {
-        setRecommendations(res.data);
-      }
-    }, 500);
-    debounced();
-
-    // eslint-disable-next-line consistent-return
-    return () => debounced.clear();
+    if (searchText.trim() !== '') {
+      const debounced = debounce(async () => {
+        const res = await getRecommendations(searchText);
+        if (res.isSuccess) {
+          setRecommendations(res.data);
+        }
+      }, 500);
+      debounced();
+      return () => debounced.clear();
+    }
+    return undefined;
   }, [searchText]);
 
   return (

@@ -9,6 +9,10 @@ export const getRecommendations = async ({
       method: 'GET',
       ...(options || {}),
     });
+
+    // eslint-disable-next-line no-console
+    console.info('calling api');
+
     if (res.ok) {
       const data = (await res.json()) as GetRecommendationsReponse;
       return { isSuccess: true, data };
